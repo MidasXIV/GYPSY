@@ -1,4 +1,4 @@
 # GYPSY
 ![alt text](gypsy.jpg)
 
-live Demp at : https://midasxiv.github.io/GYPSY/
+live Demo at : https://midasxiv.github.io/GYPSY/
