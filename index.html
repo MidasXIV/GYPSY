@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>GYPSY | Find Restaurants near you</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- jQuery & jQuery UI Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- Google Maps JavaScript API -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvVOv1yxHRJ86HbkOMOvBDVOUAFGJ7isc"></script>
+
+
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.css'>
+    <script src='https://cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js'></script>
+    <script src='bootstrap-notify.min.js'></script>
+
+
+</head>
+
+<body>
+    <div class="container-fluid p-a-0">
+        <div class="jumbotron jumbotron-fluid grad">
+            <div class="container">
+                <h1 class="display-4">gypsy</h1>
+                <p class="lead">Find Restaurants near you.</p>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="search_location" placeholder="Search Location" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn" onclick="findUserLocation()" type="button"><i class="fas fa-map-marker-alt"></i></button>
+                        <button class="btn get_map" type="button"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <br>
+
+                <!-- display google map -->
+                <div class="container-fluid" id="geomap"></div>
+                <!--<div id="map" style="float:left;width:70%; height:100%"></div>
+                <div id="directionsPanel" style="float:right;width:30%;height 100%"></div>
+-->
+                <br>
+                <h6 class=""> popular cusines in locality</h6>
+                <div class="container" id="localityCusines">
+                    <span class="badge badge-pill badge-dark" style="padding:5px;padding-left:15px;padding-right:15px;">Indian</span>
+                    <span class="badge badge-pill badge-dark" style="padding:5px;padding-left:15px;padding-right:15px;">Fast Food</span>
+                    <span class="badge badge-pill badge-dark" style="padding:5px;padding-left:15px;padding-right:15px;">South India</span>
+                    <span class="badge badge-pill badge-dark" style="padding:5px;padding-left:15px;padding-right:15px;">Arabian</span>
+                    <span class="badge badge-pill badge-dark" style="padding:5px;padding-left:15px;padding-right:15px;">Middle Eastern</span>
+                </div>
+            </div>
+        </div>
+        <h1 class="display-4 text-dark text-center">RESTAURANTS NEAR YOU</h1>
+        <div class="row slick-carousel" id="card-carousel">
+
+            <div class="col-sm-12">
+                <div class="movie-card card">
+                    <div class="color-overlay card-header">
+                        <div class="movie-share">
+                            <a class="movie-share__icon" href="#">
+                                <i class="material-icons">&#xe87d</i>
+                            </a>
+                            <a class="movie-share__icon" href="#">
+                                <i class="material-icons">&#xe253</i>
+                            </a>
+                            <a class="movie-share__icon" href="#">
+                                <i class="material-icons" onclick="directionService(this.id)">&#xe80d</i>
+                            </a>
+                        </div>
+                        <div class="movie-content">
+                            <div class="movie-header">
+                                <h1 class="movie-title">Najmat Lahore Restaurant</h1>
+                                <h4 class="movie-info">Al Mareija, Sharjah</h4>
+                            </div>
+                            <p class="movie-desc">Near Sharjah Animal Market, Al Mina Road, Al Mareija, Sharjah</p>
+                            <a class="btn2 btn-outline" href="https://www.zomato.com/sharjah/najmat-lahore-restaurant-al-mareija/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop">Order Now</a>
+
+                        </div>
+                    </div>
+                    <div class="card-body  text-center">
+                        <!-- Title 
+                        <h4 class="card-title">Kabab Bazar</h4>
+                        <!-- Text 
+                        <p class="card-text">Opposite Radisson Blu Resort, Corniche Road, Al Mujjarah, Sharjah</p>
+                        <!-- Button -->
+                        <!--<a href="#" class="btn btn-primary">Button</a>-->
+                        <h4>Najmat Lahore Restaurant</h4>
+                        <h6>Al Mareija, Sharjah</h6>
+
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+
+                        <br>
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr>
+                                    <td class="text-left">AVERAGE COST FOR TWO</td>
+                                    <td class="text-right">100 AED</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left">Rating</td>
+                                    <td class="text-right">4.4, Very Good <div class="box" style="background: #5BA829;"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left">Votes</td>
+                                    <td class="text-right">956</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left">Has online Dilivery</td>
+                                    <td class="text-right">Yes</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left"><i class="fas fa-car"></i>&nbsp;&nbsp;&nbsp;Driving</td>
+                                    <td class="text-right">5 minutes /- 2 km</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left"><i class="fas fa-walking"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Walking</td>
+                                    <td class="text-right">26 minutes /- 2 km</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <h6 class=""> popular cusines</h6>
+                        <div class="container">
+                            <span class="badge badge-pill badge-dark" style="padding:5px;padding-left:15px;padding-right:15px;">Pakistani</span>
+                            <span class="badge badge-pill badge-dark" style="padding:5px;padding-left:15px;padding-right:15px;">Indian</span>
+                            <span class="badge badge-pill badge-dark" style="padding:5px;padding-left:15px;padding-right:15px;">Mughlai</span>
+                            <span class="badge badge-pill badge-dark" style="padding:5px;padding-left:15px;padding-right:15px;">Desserts</span>
+                        </div>
+                        <!--
+                        <div class="btn-group btn-group-sm d-flex" role="group">
+                          <button type="button" class="btn btn-success w-100">Menu</button>
+                          <button type="button" class="btn btn-success btn-gypsy w-100">Directions</button>
+                          <button type="button" class="btn btn-success w-100">Reviews</button>
+                        </div>
+                        -->
+                    </div>
+                    <div class="card-footer map">
+                        <!--<div class="map" id="UK">52.21454000000001,0.54044490000003407,14</div>-->
+                        25.3549889354,55.3822507337,20
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
+                <div style="background-image: url(https://b.zmtcdn.com/data/res_imagery/5601340_RESTAURANT_f74283a8fd4bfdb8d7e280b202f95215.jpg);" class="movie-card card">
+                    <div class="color-overlay card-header">
+                        <div class="movie-share">
+                            <a class="movie-share__icon" href="#">
+                                <i class="material-icons">&#xe87d</i>
+                            </a>
+                            <a class="movie-share__icon" href="#">
+                                <i class="material-icons">&#xe253</i>
+                            </a>
+                            <a class="movie-share__icon" href="#">
+                                <i class="material-icons">&#xe80d</i>
+                            </a>
+                        </div>
+                        <div class="movie-content">
+                            <div class="movie-header">
+                                <h1 class="movie-title">Saffron</h1>
+                                <h4 class="movie-info">Al Mareija, Sharjah</h4>
+                            </div>
+                            <p class="movie-desc">Near Sharjah Animal Market, Al Mina Road, Al Mareija, Sharjah</p>
+                            <a class="btn2 btn-outline" href="https://www.zomato.com/sharjah/najmat-lahore-restaurant-al-mareija/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop">Order Now</a>
+
+                        </div>
+                    </div>
+                    <div class="card-body  text-center">
+                        <!-- Title 
+                        <h4 class="card-title">Kabab Bazar</h4>
+                        <!-- Text 
+                        <p class="card-text">Opposite Radisson Blu Resort, Corniche Road, Al Mujjarah, Sharjah</p>
+                        <!-- Button -->
+                        <!--<a href="#" class="btn btn-primary">Button</a>-->
+                        <h4>Saffron</h4>
+                        <h6>Al Mareija, Sharjah</h6>
+
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+
+                        <br>
+                        <table class="table table-sm">
+                            <tbody>
+                                <tr>
+                                    <td class="text-left">AVERAGE COST FOR TWO</td>
+                                    <td class="text-right">100 AED</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left">Rating</td>
+                                    <td class="text-right">4.4, Very Good <div class="box" style="background: #5BA829;"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left">Votes</td>
+                                    <td class="text-right">956</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left">Has online Dilivery</td>
+                                    <td class="text-right">Yes</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left"><i class="fas fa-car"></i>&nbsp;&nbsp;&nbsp;Driving</td>
+                                    <td class="text-right">5 minutes /- 2 km</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-left"><i class="fas fa-walking"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Walking</td>
+                                    <td class="text-right">26 minutes /- 2 km</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <h6 class=""> popular cusines</h6>
+                        <div class="container">
+                            <span class="badge badge-pill badge-dark" style="padding:5px;padding-left:15px;padding-right:15px;">Pakistani</span>
+                            <span class="badge badge-pill badge-dark" style="padding:5px;padding-left:15px;padding-right:15px;">Indian</span>
+                            <span class="badge badge-pill badge-dark" style="padding:5px;padding-left:15px;padding-right:15px;">Mughlai</span>
+                            <span class="badge badge-pill badge-dark" style="padding:5px;padding-left:15px;padding-right:15px;">Desserts</span>
+                        </div>
+                    </div>
+                    <div class="card-footer map" id="mapa2">
+                        <!--<div class="map" id="UK">52.21454000000001,0.54044490000003407,14</div>-->
+                        25.3544908359,55.3829380497,20
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Footer -->
+    <!--
+    <footer class="page-footer font-small teal pt-4">
+
+        <div class="container-fluid text-center text-md-left">
+
+            <div class="row">
+
+                <div class="col-md-6 mt-md-0 mt-3">
+
+                    <h5 class="text-uppercase font-weight-bold">GYPSY</h5>
+                    <p>GYPSY Simple application that find restaurants around you. <br>GYPSY can tell you the ratings of the restaurnats, their speciality, the average cost of dining for two people and best of all the time it would take for you to get there by driving or by foot.<br>
+                    GYPSY created for submission of Service Oriented Computing Assignment by Aman Shaikh 2015A7PS0039U.</p>
+
+                </div>
+                <hr class="clearfix w-100 d-md-none pb-3">
+
+                <div class="col-md-6 mb-md-0 mb-3">
+
+                    <h5 class="text-uppercase font-weight-bold">Micro Web Services used</h5>
+                    <p>Zomato API for developers to find restaurant details and locations</p>
+                    <p>Google Map API to allow users to find their location or search an address. Show the position of the user and the restaurant on the live map. Find the directions and time required to get there.</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a href="https://mdbootstrap.com/education/bootstrap/"> MidasXIV</a>
+        </div>
+    </footer>
+-->
+    <!-- Footer -->
+    <script src="gypsy.js"></script>
+    <script src="zomato.js"></script>
+</body>
+
+</html>
